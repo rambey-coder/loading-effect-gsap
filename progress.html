@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .loading {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background: palevioletred;
+        }
+
+        .bar-cont {
+            width: 100%;
+        }
+        .progress {
+            width: 70%;
+            background-color: rgba(255, 166, 0, 0.4);
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px;
+            margin-top: 1rem;
+        }
+
+        .bar {
+            width: 0%;
+            height: 15px;
+            /* padding: .5px; */
+            background: red;
+        }
+
+        .container{
+            height: 100vh;
+            background: red;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <!-- <div class="bar-cont"> -->
+            <div class="percent"></div>
+            <div class="progress">
+                <div class="bar"></div>
+            </div>
+        <!-- </div> -->
+    </div>
+    <div class="container">
+        <h1>lorem</h1>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <script>
+        const load = gsap.timeline({paused: 'true'})
+        load.to('.percent , .progress, .loading', {
+            duration: .4,
+            opacity: 0,
+            display: 'none'
+        })
+        load.to('.container', {
+        duration: 1.5,
+        display: 'block',
+        // y: '-2000%',
+        delay: 1
+        }, '-=.2')
+
+        let id, width = 0;
+
+        function loading(){
+            id = setInterval(frame, 40)
+        }
+
+        function frame() {
+            if(width > 100 - 1) {
+                clearInterval(id)
+                load.play()
+            } else{
+                width++;
+                const bar = document.querySelector(".bar")
+                bar.style.width = width + '%'
+                const per = document.querySelector(".percent").innerHTML = width + '%'
+            }
+        }
+
+        window.onload = function(){
+        loading()
+        }
+        
+    </script>
+</body>
+</html>

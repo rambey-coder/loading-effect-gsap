@@ -3,16 +3,18 @@ const till = gsap.timeline({
 })
 till.to('#percent , #bar', {
     duration: 2,
-    opacity:1,
-    zIndex: -1
+    opacity: 1,
 })
-till.to('#preloader', {
-    duration: 8,
-    width: '0%'
-})
+
+// till.to('#preloader', {
+//     duration: 8,
+//     width: '0%',
+//     delay: 3
+// })
 till.from('.container', {
     duration: 1.5,
-    y: '-150%'
+    y: '-150%',
+    delay: 3
 }, '-=.2')
 till.to('.container h1', {
     skewY: 10,
@@ -24,19 +26,26 @@ till.to('.container h1', {
 
 let width = 1;
 let bar = document.getElementById('barconfirm')
-let id;
+let id = 1;
+// console.log(id);
 
 function move() {
-    id = setInterval(frame, 10)
+    id = setInterval(frame, 50)
 }
 
 function frame() {
-    if(width > 100) {
+    if(width > 100 -1 ) {
         clearInterval(id)
         till.play()
-    }else {
+    } 
+    else {
         width++;
         bar.style.width = width + '%'
-        document.getElementById('percent').innerHTML = width + '% '
+        const per = document.getElementById('percent')
+        per.innerHTML = width + '% '
     }
+};
+
+window.onload = function(){
+    move()
 }
