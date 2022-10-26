@@ -31,7 +31,7 @@ function loading() {
 }
 
 function frame() {
-    if(width > 100) {
+    if(width > 100 - 1) {
         clearInterval(id)
         load.play()
     } else {
